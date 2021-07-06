@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.domain.Dates;
 import com.example.demo.domain.TicketModel;
 import com.example.demo.service.TicketService;
 import com.example.demo.util.Page;
@@ -21,9 +22,14 @@ public class MainController {
     public Page<TicketModel> getTickets(@RequestParam("pageSize") int pageSize, @RequestParam("pageNum") int pageNum,
                                         @RequestParam(value = "sortBy", required = false) Optional<List<String>> sort,
                                         @RequestParam(value = "domain", required = false) Optional<List<String>> domains,
-                                        @RequestParam(value = "status", required = false) Optional<List<String>> statuses
+                                        @RequestParam(value = "status", required = false) Optional<List<String>> statuses,
+                                        @RequestParam(value = "creationStartDate", required = false) String creationStartDate,
+                                        @RequestParam(value = "creationEndDate", required = false) String creationEndDate,
+                                        @RequestParam(value = "closureStartDate", required = false) String closureStartDate,
+                                        @RequestParam(value = "closureEndDate", required = false) String closureEndDate
                                    ) {
-        return ticketService.findAll(pageNum, pageSize, sort, domains, statuses);
+        Dates dates = new Dates(creationStartDate, creationEndDate, closureStartDate, closureEndDate);
+        return ticketService.findAll(pageNum, pageSize, sort, domains, statuses, dates);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.domain.Dates;
 import com.example.demo.domain.TicketModel;
 import com.example.demo.repo.TicketJdbcRepo;
 import com.example.demo.util.Page;
@@ -18,11 +19,11 @@ public class TicketService {
 
     private final TicketJdbcRepo ticketJdbcRepo;
 
-    public Page<TicketModel> findAll(int pageNum, int pageSize, Optional<List<String>> sort,
-                                     Optional<List<String>> domains, Optional<List<String>> statuses) {
+    public Page<TicketModel> findAll(int pageNum, int pageSize, Optional<List<String>> sort, Optional<List<String>> domains,
+                                     Optional<List<String>> statuses, Dates dates) {
         String q = new QueryBuilder()
           .withUserId("123")
-          .withFiltering(domains, statuses)
+          .withFiltering(domains, statuses, dates)
           .withSorting(getSortObjs(sort))
           .withPaging(pageNum, pageSize)
           .build();

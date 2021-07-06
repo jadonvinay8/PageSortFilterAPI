@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 @Data
 @NoArgsConstructor
@@ -25,6 +26,8 @@ public class Ticket implements Serializable {
     private String domain;
     private String status;
     private String identifiers;
+    private Timestamp creationTime;
+    private Timestamp closureTime;
     private boolean isActionTaken;
 
 }
